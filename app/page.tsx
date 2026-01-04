@@ -59,7 +59,7 @@ export default function Home() {
 
             <div className="mt-6 flex flex-wrap gap-3">
               <a
-                href="/portfolio"
+                href="/photo"
                 className="rounded-2xl bg-white px-5 py-2.5 text-sm font-medium text-black"
               >
                 View Photography
