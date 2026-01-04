@@ -1,4 +1,5 @@
 import "./globals.css";
+import Link from "next/link";
 import { Instagram, Github, Linkedin } from "lucide-react";
 
 export const metadata = {
@@ -6,24 +7,48 @@ export const metadata = {
   description: "Photography + Engineering Portfolio",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
       <body className="bg-white text-zinc-900">
         <div className="mx-auto max-w-6xl px-6 py-10">
           <nav className="flex items-center justify-between">
             {/* Logo / Name */}
-            <a href="/" className="text-xl font-semibold tracking-tight">
+            <Link
+              href="/"
+              className="text-xl font-semibold tracking-tight"
+            >
               TAONGA MWAKA
-            </a>
+            </Link>
 
             {/* Right side: links + socials */}
             <div className="flex items-center gap-6">
               {/* Page links */}
               <div className="hidden md:flex items-center gap-6 text-xs tracking-widest uppercase text-zinc-600">
-                <a className="hover:text-zinc-900" href="/photo">Engineering</a>
-                <a className="hover:text-zinc-900" href="/engineering">Photography</a>
-                <a className="hover:text-zinc-900" href="/about">About Me</a>
+                <Link
+                  href="/engineering"
+                  className="hover:text-zinc-900"
+                >
+                  Engineering
+                </Link>
+
+                <Link
+                  href="/photo"
+                  className="hover:text-zinc-900"
+                >
+                  Photography
+                </Link>
+
+                <Link
+                  href="/#about"
+                  className="hover:text-zinc-900"
+                >
+                  About Me
+                </Link>
               </div>
 
               {/* Social icons */}
@@ -52,12 +77,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   href="https://www.linkedin.com/in/taonga-mwaka-pumulo"
                   target="_blank"
                   rel="noreferrer"
-                  aria-label="Instagram"
+                  aria-label="LinkedIn"
                   className="text-zinc-600 hover:text-zinc-900"
                 >
                   <Linkedin size={18} />
                 </a>
-
               </div>
             </div>
           </nav>
