@@ -133,7 +133,7 @@ export default function Home() {
 <p className="mt-4 text-sm leading-relaxed text-zinc-300">
   In my second year of college, when the stress of being a student built up,
   I found peace in the idea of being sheltered by creating things for myself.
-  This led me to choose it as my minor, one of the best decisions I have ever made.
+  This led me to choose photography as my minor, one of the best decisions I have ever made.
 </p>
 
 <p className="mt-4 text-sm leading-relaxed text-zinc-300">
