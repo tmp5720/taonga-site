@@ -1,6 +1,8 @@
 import "./globals.css";
 import Link from "next/link";
 import { Instagram, Github, Linkedin } from "lucide-react";
+import BackToTop from "./components/BackToTop";
+
 
 export const metadata = {
   title: "Taonga Pumulo",
@@ -87,7 +89,49 @@ export default function RootLayout({
           </nav>
 
           <main className="mt-14">{children}</main>
+          <footer className="mt-24 border-t border-zinc-200 pt-6 text-xs text-zinc-500">
+  <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
+    <span>
+      © {new Date().getFullYear()} — Designed & built by Taonga Mwaka Pumulo
+    </span>
+
+    <div className="flex items-center gap-5">
+      <a
+        href="https://instagram.com/taongasphoto"
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Instagram"
+        className="hover:text-zinc-900 transition"
+      >
+        <Instagram size={16} />
+      </a>
+
+      <a
+        href="https://github.com/tmp5720"
+        target="_blank"
+        rel="noreferrer"
+        aria-label="GitHub"
+        className="hover:text-zinc-900 transition"
+      >
+        <Github size={16} />
+      </a>
+
+      <a
+        href="https://www.linkedin.com/in/taonga-mwaka-pumulo"
+        target="_blank"
+        rel="noreferrer"
+        aria-label="LinkedIn"
+        className="hover:text-zinc-900 transition"
+      >
+        <Linkedin size={16} />
+      </a>
+    </div>
+  </div>
+</footer>
+
+
         </div>
+        <BackToTop />
       </body>
     </html>
   );
