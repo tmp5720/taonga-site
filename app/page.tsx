@@ -92,7 +92,7 @@ export default function Home() {
       <div aria-hidden className="h-40 sm:h-64" />
 
       {/* Spacer so About is NOT visible initially */}
-<div aria-hidden className="h-40 sm:h-64" />
+<div aria-hidden className="h-20 sm:h-64" />
 
 {/* SUB DIVIDER */}
 <div className="px-8 sm:px-12">
@@ -103,7 +103,7 @@ export default function Home() {
 <section
   ref={aboutRef}
   id="about"
-  className={`bg-black rounded-3xl overflow-hidden transition-all duration-700 ease-out
+  className={`bg-black rounded-3xl overflow-hidden transition-all duration-1000 ease-out
     ${aboutVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}
   `}
 >
