@@ -114,59 +114,60 @@ export default function Home() {
         <h2 className="text-2xl font-semibold tracking-tight text-white">
           About Me
         </h2>
-
         <p className="mt-4 text-sm leading-relaxed text-zinc-300">
-          I’m Taonga! I’m currently a Computer Engineering Technology student born and raised in Zambia,
-           studying in the United States, expected to graduate in May 2026! 
-           I have hands-on, full-time experience in Research and Development Engineering where 
-           I got to understand working on firmware development, completing time-constrained projects 
-           and a being part of a team of people from different parts of the world in every sense.
-        </p>
+  I’m Taonga! A Computer Engineering Technology student born and raised in Zambia,
+  studying in the United States, and expected to graduate in May 2026.
+  I have hands-on, full-time experience in Research and Development Engineering, where
+  I gained an understanding of firmware development, completed time-constrained projects,
+  and worked as part of a team of people from different parts of the world.
+</p>
 
-        <p className="mt-4 text-sm leading-relaxed text-zinc-300">
-          I started to be fascinated with by the art of photography after taking a photo of sunshine reflecting
-           off a glass building in 2012 while traveling with my family. For around a decade, 
-           I had an on and off relationship with the art until 2022. 
-        </p>
+<p className="mt-4 text-sm leading-relaxed text-zinc-300">
+  On the more artistic side, I’m a photographer.
+  My interest in photography was sparked in 2012 by a simple moment—
+  sunlight reflecting off a glass building during a family trip.
+  What followed was an on-and-off relationship with the medium for nearly a decade,
+  until it finally stuck in 2022.
+</p>
 
-        <p className="mt-4 text-sm leading-relaxed text-zinc-300">
-          In my second year of college, when stress the stress of being a student built up,
-           I found peace in the idea of being sheltered by creating things for me. 
-           This led me to pick it as my minor, one of the best decisions I have ever made.
+<p className="mt-4 text-sm leading-relaxed text-zinc-300">
+  In my second year of college, when the stress of being a student built up,
+  I found peace in the idea of being sheltered by creating things for myself.
+  This led me to choose it as my minor, one of the best decisions I have ever made.
+</p>
 
-        </p>
+<p className="mt-4 text-sm leading-relaxed text-zinc-300">
+  I started to develop my skills and became more particular about what I wanted to photograph
+  and how I wanted to photograph things. I wanted other people to see what I saw too—
+  the story I was trying to tell. This led to many of my images being tied together as narratives.
+</p>
 
-        <p className="mt-4 text-sm leading-relaxed text-zinc-300">
-          I started to develop my skills and became more particular about what I wanted to photograph
-           and how I wanted to photograph things. I wanted other people to see what I saw too, 
-           the story I was trying to tell. This led to a bunch of my images being tied together as narratives
-        </p>
+<p className="mt-4 text-sm leading-relaxed text-zinc-300">
+  Fast-forward to the fall of 2025. I returned to school for my senior year of college
+  after working a full-time co-op for a year. So much had changed;
+  it felt like so much time had gone by in the blink of an eye.
+</p>
 
-        <p className="mt-4 text-sm leading-relaxed text-zinc-300">
-          Fast-forward to the fall of 2025. I returned to school for my senior year of college 
-          after working a co-op full-time for a year. So much had changed, 
-          it felt like so much time had gone by in the blink of an eye.
+<p className="mt-4 text-sm leading-relaxed text-zinc-300">
+  That became my main theme for most of my work—TIME.
+</p>
 
-        </p>
+<p className="mt-4 text-sm leading-relaxed text-zinc-300">
+  We’re all running out of time, but I want to explore the passage of time,
+  the nostalgic feeling of the past, as well as the desire for the future
+  and the memories yet to be made.
+</p>
 
-        <p className="mt-4 text-sm leading-relaxed text-zinc-300">
-          That became my main theme for most of my work - TIME.
-        </p>
+<p className="mt-4 text-sm leading-relaxed text-zinc-300">
+  I taught myself modern web scripting to design and build this site from the ground up,
+  using it not only as an extension of my engineering practice but also as a representation
+  of my desire to create. With only so much time in the world, why not see how much you can create while you still can?
+</p>
 
-        <p className="mt-4 text-sm leading-relaxed text-zinc-300">
-          We’re all running out of time, but I want to explore the aspects of the passage of time 
-          and the nostalgic feeling of the past as well as the desire for the future and memories to be made.
-        </p>
+<p className="mt-4 text-sm leading-relaxed text-zinc-300">
+  I hope you enjoy your time here!
+</p>
 
-        <p className="mt-4 text-sm leading-relaxed text-zinc-300">
-          I taught myself modern web scripting to design and build this site from the ground up,
-           using it not only as an extension of my engineering practice but also a representation of my desire to create.
-            With only so much time in the world, why not see how much you can create while you still can?
-        </p>
-
-        <p className="mt-4 text-sm leading-relaxed text-zinc-300">
-          I hope you enjoy your time here!
-        </p>
       </div>
 
       {/* PORTRAIT */}
