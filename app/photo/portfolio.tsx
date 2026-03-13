@@ -6,7 +6,6 @@ type Category = "Landscape" | "Portraiture" | "Collections";
 
 const DATA: Record<Exclude<Category, "Collections">, string[]> = {
   Landscape: [
-    "/portfolio/landscape0.jpg",
     "/portfolio/landscape1.jpg",
     "/portfolio/landscape2.jpg",
     "/portfolio/landscape3.jpg",
@@ -59,6 +58,7 @@ type CollectionItem = {
 type CollectionGroup = {
   title: string;
   description: string;
+  coverImage: string;
   items: CollectionItem[];
 };
 
@@ -66,7 +66,8 @@ const COLLECTIONS: CollectionGroup[] = [
   {
     title: "The Theory of Equivalence",
     description:
-      "The older I get, the more I think about choices, and how at 23 years old the choices I make have consequences. The older I get, the more numb I get to the choices my father made and makes. The older I get, the less I care for my relationship with my father. So why did this scene make me feel like something was missing?",
+      "A reflection on family, absence, memory, and the emotional weight a photograph can hold.",
+    coverImage: "/portfolio/collections/canadice-4.jpg",
     items: [
       {
         image: "/portfolio/collections/canadice-9.jpg",
@@ -74,7 +75,7 @@ const COLLECTIONS: CollectionGroup[] = [
       },
       {
         image: "/portfolio/collections/canadice-4.jpg",
-        text: "Minor White’s theory of Equivalence may help explain why this scene and image affected me so strongly. White suggests that a photograph becomes an “Equivalent” when what the viewer/audience sees corresponds to something internal, transforming the image from a simple record into a more symbolic experience, typically shaped by emotions, memories, and moments of self-awareness.",
+        text: "Minor White’s theory of Equivalence may help explain why this scene and image affected me so strongly. White suggests that a photograph becomes an “Equivalent” when what the viewer or audience sees corresponds to something internal, transforming the image from a simple record into a more symbolic experience, typically shaped by emotions, memories, and moments of self-awareness.",
       },
       {
         image: "/portfolio/collections/canadice-7.jpg",
@@ -96,7 +97,8 @@ const COLLECTIONS: CollectionGroup[] = [
   {
     title: "Dock Day 2026",
     description:
-      "This collection focuses on the behind the scenes in sports. The hectic, dirty and tiring processes behind all the races, competitions, wins and losses. Highlighted through RIT Rowing.",
+      "A look at the behind the scenes labor and atmosphere surrounding the less glamorized aspects of athletics.",
+    coverImage: "/portfolio/collections/dock_day-21.jpg",
     items: [
       {
         image: "/portfolio/collections/dock_day1.jpg",
@@ -132,6 +134,38 @@ const COLLECTIONS: CollectionGroup[] = [
       },
     ],
   },
+  {
+    title: "Studio Work",
+    description:
+      "A look into traditional studio work. A blend of artificial lighting and set direction.",
+    coverImage: "/portfolio/collections/unsharp-2.jpg",
+    items: [
+      {
+        image: "/portfolio/collections/nat1.jpg",
+        text: "",
+      },
+      {
+        image: "/portfolio/collections/nat2.jpg",
+        text: "",
+      },
+      {
+        image: "/portfolio/collections/nat3.jpg",
+        text: "",
+      },
+      {
+        image: "/portfolio/collections/nat4.jpg",
+        text: "",
+      },
+      {
+        image: "/portfolio/collections/nat5.jpg",
+        text: "",
+      },
+      {
+        image: "/portfolio/collections/nat6.jpg",
+        text: "",
+      },
+    ],
+  },
 ];
 
 export default function Portfolio() {
@@ -139,8 +173,8 @@ export default function Portfolio() {
   const [shown, setShown] = useState<Category>("Landscape");
   const [isFading, setIsFading] = useState(false);
 
-  const [activeCollection, setActiveCollection] = useState(0);
-  const [shownCollection, setShownCollection] = useState(0);
+  const [activeCollection, setActiveCollection] = useState<number | null>(null);
+  const [shownCollection, setShownCollection] = useState<number | null>(null);
   const [isCollectionFading, setIsCollectionFading] = useState(false);
 
   const requestTab = (next: Category) => {
@@ -153,6 +187,11 @@ export default function Portfolio() {
     setActiveCollection(index);
   };
 
+  const resetCollections = () => {
+    setActiveCollection(null);
+    setShownCollection(null);
+  };
+
   useEffect(() => {
     if (active === shown) return;
 
@@ -160,6 +199,11 @@ export default function Portfolio() {
 
     const swap = window.setTimeout(() => {
       setShown(active);
+
+      if (active !== "Collections") {
+        resetCollections();
+      }
+
       window.requestAnimationFrame(() => setIsFading(false));
     }, 160);
 
@@ -168,6 +212,7 @@ export default function Portfolio() {
 
   useEffect(() => {
     if (activeCollection === shownCollection) return;
+    if (activeCollection === null) return;
 
     setIsCollectionFading(true);
 
@@ -179,7 +224,8 @@ export default function Portfolio() {
     return () => window.clearTimeout(swap);
   }, [activeCollection, shownCollection]);
 
-  const currentCollection = COLLECTIONS[shownCollection];
+  const currentCollection =
+    shownCollection !== null ? COLLECTIONS[shownCollection] : null;
 
   return (
     <div className="space-y-10">
@@ -191,7 +237,7 @@ export default function Portfolio() {
             className={
               active === cat
                 ? "text-zinc-900 border-b border-zinc-900 pb-1"
-                : "hover:text-zinc-800"
+                : "hover:text-zinc-800 transition-colors"
             }
           >
             {cat}
@@ -207,94 +253,144 @@ export default function Portfolio() {
       >
         {shown === "Collections" ? (
           <div className="space-y-10">
-            <div className="flex flex-wrap justify-center gap-6 text-sm text-zinc-600">
-              {COLLECTIONS.map((collection, index) => (
-                <button
-                  key={collection.title}
-                  onClick={() => requestCollection(index)}
-                  className={
-                    activeCollection === index
-                      ? "text-zinc-900 border-b border-zinc-900 pb-1"
-                      : "hover:text-zinc-800"
-                  }
-                >
-                  {collection.title}
-                </button>
-              ))}
-            </div>
-
-            <div
-              className={[
-                "transform transition-all duration-700 ease-out",
-                isCollectionFading
-                  ? "opacity-0 translate-y-4"
-                  : "opacity-100 translate-y-0",
-              ].join(" ")}
-            >
-              <section key={currentCollection.title} className="space-y-12">
+            {shownCollection === null ? (
+              <section className="space-y-10">
                 <div className="max-w-2xl mx-auto text-center space-y-3">
-                  <h2 className="text-2xl md:text-3xl font-medium text-zinc-900">
-                    {currentCollection.title}
-                  </h2>
                   <p className="text-base leading-7 text-zinc-600">
-                    {currentCollection.description}
+                    Select a collection to view.
                   </p>
                 </div>
 
-                <div className="space-y-20">
-                  {currentCollection.items.map((item, index) => {
-                    if (!item.image) {
-                      return (
-                        <div
-                          key={`${currentCollection.title}-${index}`}
-                          className="max-w-2xl mx-auto text-center"
-                        >
-                          <p className="text-base leading-7 text-zinc-700">
-                            {item.text}
-                          </p>
-                        </div>
-                      );
-                    }
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                  {COLLECTIONS.map((collection, index) => (
+                    <button
+                      key={collection.title}
+                      onClick={() => requestCollection(index)}
+                      className="group relative overflow-hidden rounded-2xl min-h-[340px] text-left bg-zinc-100"
+                    >
+                      <img
+                        src={collection.coverImage}
+                        alt={collection.title}
+                        className="absolute inset-0 h-full w-full object-cover transition duration-500 ease-out group-hover:scale-105"
+                      />
 
-                    return (
-                      <div
-                        key={`${currentCollection.title}-${index}`}
-                        className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-stretch min-h-[70vh]"
-                      >
-                        <div
-                          className={
-                            index % 2 === 0 ? "order-1" : "order-1 md:order-2"
-                          }
-                        >
-                          <div className="overflow-hidden rounded-xl bg-zinc-100">
-                            <img
-                              src={item.image}
-                              alt=""
-                              className="w-full h-auto block transition-opacity duration-200 hover:opacity-90"
-                              loading="lazy"
-                            />
-                          </div>
-                        </div>
+                      <div className="absolute inset-0 bg-black/40 transition duration-300 group-hover:bg-black/25" />
 
-                        <div
-                          className={
-                            index % 2 === 0
-                              ? "order-2 flex items-center justify-center"
-                              : "order-2 md:order-1 flex items-center justify-center"
-                          }
-                        >
-                          <div className="w-full text-center">
-                            <p className="text-base leading-7 text-zinc-700">
-                              {item.text}
-                            </p>
-                          </div>
-                        </div>
+                      <div className="relative z-10 flex h-full flex-col justify-end p-8">
+                        <h3 className="text-white text-2xl md:text-3xl font-medium">
+                          {collection.title}
+                        </h3>
+                        <p className="mt-3 text-sm md:text-base leading-6 text-white/85 max-w-md">
+                          {collection.description}
+                        </p>
                       </div>
-                    );
-                  })}
+                    </button>
+                  ))}
                 </div>
               </section>
-            </div>
+            ) : (
+              <>
+                <div className="flex flex-wrap justify-center gap-6 text-sm text-zinc-600">
+                  {COLLECTIONS.map((collection, index) => (
+                    <button
+                      key={collection.title}
+                      onClick={() => requestCollection(index)}
+                      className={
+                        activeCollection === index
+                          ? "text-zinc-900 border-b border-zinc-900 pb-1"
+                          : "hover:text-zinc-800 transition-colors"
+                      }
+                    >
+                      {collection.title}
+                    </button>
+                  ))}
+
+                  <button
+                    onClick={resetCollections}
+                    className="text-zinc-500 hover:text-zinc-800 transition-colors"
+                  >
+                    Back
+                  </button>
+                </div>
+
+                <div
+                  className={[
+                    "transform transition-all duration-700 ease-out",
+                    isCollectionFading
+                      ? "opacity-0 translate-y-4"
+                      : "opacity-100 translate-y-0",
+                  ].join(" ")}
+                >
+                  {currentCollection && (
+                    <section key={currentCollection.title} className="space-y-12">
+                      <div className="max-w-2xl mx-auto text-center space-y-3">
+                        <h2 className="text-2xl md:text-3xl font-medium text-zinc-900">
+                          {currentCollection.title}
+                        </h2>
+                        <p className="text-base leading-7 text-zinc-600">
+                          {currentCollection.description}
+                        </p>
+                      </div>
+
+                      <div className="space-y-20">
+                        {currentCollection.items.map((item, index) => {
+                          if (!item.image) {
+                            return (
+                              <div
+                                key={`${currentCollection.title}-${index}`}
+                                className="max-w-2xl mx-auto text-center"
+                              >
+                                <p className="text-base leading-7 text-zinc-700">
+                                  {item.text}
+                                </p>
+                              </div>
+                            );
+                          }
+
+                          return (
+                            <div
+                              key={`${currentCollection.title}-${index}`}
+                              className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center min-h-[70vh] max-w-6xl mx-auto"
+                            >
+                              <div
+                                className={
+                                  index % 2 === 0
+                                    ? "order-1 flex items-center justify-center"
+                                    : "order-1 md:order-2 flex items-center justify-center"
+                                }
+                              >
+                                <div className="w-full max-w-2xl mx-auto rounded-2xl overflow-hidden">
+                                  <img
+                                    src={item.image}
+                                    alt=""
+                                    className="block w-full h-auto object-cover transition-opacity duration-200 hover:opacity-90"
+                                    loading="lazy"
+                                  />
+                                </div>
+                              </div>
+
+                              <div
+                                className={
+                                  index % 2 === 0
+                                    ? "order-2 flex items-center justify-center"
+                                    : "order-2 md:order-1 flex items-center justify-center"
+                                }
+                              >
+                                <div className="w-full max-w-xl mx-auto text-center">
+                                  <p className="text-base leading-7 text-zinc-700">
+                                    {item.text}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </section>
+                  )}
+                </div>
+              </>
+            )}
           </div>
         ) : (
           <div className="columns-1 sm:columns-2 lg:columns-3 [column-gap:2rem]">
